@@ -1,0 +1,129 @@
+/* Reset and Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html, body {
+  height: 100%;
+  overflow: hidden;
+  background: #000;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+}
+
+/* Starfield Canvas covers the full viewport */
+#star-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+/* Main App Container; default portrait styling */
+#app-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Video Container (Portrait Mode) */
+#video-container {
+  position: relative;
+  width: 100%;
+  height: 60%; /* Adjust height as needed */
+  overflow: hidden;
+}
+
+/* Video is centered and fills height, preserving a 9:16 aspect ratio */
+#video-container video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: auto;
+  height: 100%;
+  transform: translate(-50%, -50%);
+  object-fit: cover;
+}
+
+/* Controls Overlay styling */
+#controls-overlay {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 20px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+/* Enhanced Button Styling with Glowing Animation */
+#controls-overlay button,
+.universe-btn {
+  background: rgba(0, 0, 0, 0.7);
+  border: none;
+  border-radius: 50px;
+  color: #fff;
+  font-size: 1rem;
+  padding: 10px 20px;
+  cursor: pointer;
+  outline: none;
+  animation: buttonGlow 3s infinite ease-in-out;
+  transition: background 0.3s ease;
+}
+
+#controls-overlay button:hover,
+.universe-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Universe Selector Bar Styling */
+#universe-selector {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  padding: 10px 0;
+  background: rgba(0, 0, 0, 0.4);
+}
+
+/* Keyframes for button glowing effect */
+@keyframes buttonGlow {
+  0%, 100% {
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.6);
+  }
+}
+
+/* Show controls when interacting */
+.show-controls #controls-overlay {
+  opacity: 1;
+}
+
+/* Landscape Mode Styles (rotated view) */
+#app-container.landscape {
+  transform: rotate(90deg);
+  transform-origin: center;
+  width: 100vh;
+  height: 100vw;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -50vw;
+  margin-left: -50vh;
+}
+
+/* Adjust video container for landscape if needed */
+#app-container.landscape #video-container {
+  height: 100%;
+  width: auto;
+}
